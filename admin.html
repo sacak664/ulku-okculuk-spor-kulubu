@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetici Paneli - Ülkü Okçuluk Spor Kulübü</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-box">
+            <div class="login-logo">
+                <img src="logo.png" alt="Ülkü Okçuluk Spor Kulübü Logo" class="logo-img-login">
+            </div>
+            <h1>Ülkü Okçuluk Spor Kulübü</h1>
+            <h2>Yönetici Giriş Paneli</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Kullanıcı Adı:</label>
+                    <input type="text" id="username" required placeholder="Kullanıcı adını girin">
+                </div>
+                <div class="form-group">
+                    <label for="password">Şifre:</label>
+                    <input type="password" id="password" required placeholder="Şifrenizi girin">
+                </div>
+                <button type="submit" class="btn-login">Giriş Yap</button>
+            </form>
+            <p id="loginError" class="error-message"></p>
+            <p class="hint">Demo: Kullanıcı Adı: admin | Şifre: 1234</p>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminContainer" class="admin-container" style="display: none;">
+        <header class="admin-header">
+            <div class="admin-header-content">
+                <div class="admin-logo">
+                    <img src="logo.png" alt="Ülkü Okçuluk Spor Kulübü Logo" class="logo-img-admin">
+                    <h1>Yönetici Paneli</h1>
+                </div>
+                <button id="logoutBtn" class="btn-logout">Çıkış Yap</button>
+            </div>
+        </header>
+
+        <div class="admin-main">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="admin-nav">
+                    <button class="nav-item active" data-tab="gallery">📸 Galeri Yönetimi</button>
+                    <button class="nav-item" data-tab="content">📝 İçerik Düzenleme</button>
+                    <button class="nav-item" data-tab="settings">⚙️ Ayarlar</button>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="admin-content">
+
+                <!-- Gallery Management Tab -->
+                <section id="gallery-tab" class="tab-content active">
+                    <h2>Galeri Yönetimi</h2>
+                    
+                    <div class="upload-section">
+                        <h3>Yeni Resim Ekle</h3>
+                        <form id="uploadForm" class="upload-form">
+                            <div class="form-group">
+                                <label for="imageTitle">Resim Başlığı:</label>
+                                <input type="text" id="imageTitle" required placeholder="Resmin başlığını girin">
+                            </div>
+                            <div class="form-group">
+                                <label for="imageFile">Resim Dosyası:</label>
+                                <input type="file" id="imageFile" accept="image/*" required>
+                                <p class="help-text">Desteklenen formatlar: JPG, PNG, GIF</p>
+                            </div>
+                            <button type="submit" class="btn-primary">➕ Resim Ekle</button>
+                        </form>
+                    </div>
+
+                    <div class="gallery-management">
+                        <h3>Yüklenen Resimler</h3>
+                        <div id="galleryManagement" class="gallery-management-list">
+                            <!-- Yönetim resimleri burada görünecek -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Content Edit Tab -->
+                <section id="content-tab" class="tab-content">
+                    <h2>İçerik Düzenleme</h2>
+                    
+                    <div class="content-edit-section">
+                        <h3>Hakkımızda Metni</h3>
+                        <form id="contentForm">
+                            <div class="form-group">
+                                <label for="aboutText">Hakkımızda Metni:</label>
+                                <textarea id="aboutText" rows="6" placeholder="Klüp hakkında bilgi yazın"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactInfo">İletişim Bilgileri:</label>
+                                <textarea id="contactInfo" rows="4" placeholder="İletişim detaylarını girin"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">💾 Kaydet</button>
+                        </form>
+                    </div>
+
+                    <div id="contentMessage" class="success-message" style="display: none;"></div>
+                </section>
+
+                <!-- Settings Tab -->
+                <section id="settings-tab" class="tab-content">
+                    <h2>Ayarlar</h2>
+                    
+                    <div class="settings-section">
+                        <h3>Genel Ayarlar</h3>
+                        <form id="settingsForm">
+                            <div class="form-group">
+                                <label for="siteName">Site Adı:</label>
+                                <input type="text" id="siteName" value="Ülkü Okçuluk Spor Kulübü">
+                            </div>
+                            <div class="form-group">
+                                <label for="siteEmail">Site E-maili:</label>
+                                <input type="email" id="siteEmail" value="gaziantepulkuokculuk@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="sitePhone">Site Telefonu:</label>
+                                <input type="tel" id="sitePhone" value="+90 552 240 99 25">
+                            </div>
+                            <button type="submit" class="btn-primary">💾 Ayarları Kaydet</button>
+                        </form>
+                    </div>
+
+                    <div class="danger-zone">
+                        <h3>⚠️ Tehlikeli İşlemler</h3>
+                        <button id="clearGalleryBtn" class="btn-danger">🗑️ Galeriyi Temizle</button>
+                        <p class="help-text">Bu işlem geri alınamaz!</p>
+                    </div>
+
+                    <div id="settingsMessage" class="success-message" style="display: none;"></div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
