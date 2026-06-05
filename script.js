@@ -35,44 +35,34 @@ function updateYear() {
     }
 }
 
+// Galeriden resimleri yükle
 function loadGallery() {
     const galleryContainer = document.getElementById('galleryContainer');
-
-    if (!galleryContainer) {
-        return;
-    }
-
-    let galleryData = [];
-
-    try {
-        galleryData = JSON.parse(localStorage.getItem('gallery')) || [];
-    } catch {
-        galleryData = [];
-    }
-
-    if (!Array.isArray(galleryData) || galleryData.length === 0) {
-        return;
-    }
-
+    if (!galleryContainer) return;
+    
+    // localStorage'dan galeriyi al
+    const galleryData = JSON.parse(localStorage.getItem('gallery')) || [];
+    // önce varsa önceki içeriği temizle
     galleryContainer.innerHTML = '';
 
+    // Eğer hiç resim yoksa mesaj göster
+    if (galleryData.length === 0) {
+        galleryContainer.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+                <p style="font-size: 1.2rem; color: #666;">Henüz resim eklenmemiştir.</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Galeriyi oluştur
     galleryData.forEach((item) => {
-        if (!item || !item.image) {
-            return;
-        }
-
-        const title = item.title || 'Ülkü Okçuluk';
-        const galleryItem = document.createElement('article');
-        const image = document.createElement('img');
-        const heading = document.createElement('h3');
-
-        galleryItem.className = 'gallery-card';
-        image.src = item.image;
-        image.alt = title;
-        image.loading = 'lazy';
-        heading.textContent = title;
-
-        galleryItem.append(image, heading);
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.innerHTML = `
+            <img src="${item.image}" alt="${item.title}">
+            <div class="gallery-item-title">${item.title}</div>
+        `;
         galleryContainer.appendChild(galleryItem);
     });
 }
