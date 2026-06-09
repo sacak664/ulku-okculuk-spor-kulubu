@@ -39,6 +39,8 @@ function updateYear() {
 function loadGallery() {
     const galleryContainer = document.getElementById('galleryContainer');
     if (!galleryContainer) return;
+    // Eğer statik içerik varsa (doğrudan HTML'de eklenmişse), localStorage yüklemesini atla
+    if (galleryContainer.dataset && galleryContainer.dataset.static === 'true') return;
     
     // localStorage'dan galeriyi al
     const galleryData = JSON.parse(localStorage.getItem('gallery')) || [];
